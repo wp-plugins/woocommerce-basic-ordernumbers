@@ -1,8 +1,9 @@
 === WooCommerce Basic Ordernumbers ===
+Plugin Name: Ordernumbers for WooCommerce
 Contributors: opentools
 Tags: WooCommerce, Order numbers, orders
 Requires at least: 4.0
-Tested up to: 4.2.2
+Tested up to: 4.2.3
 Stable tag: 1.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -70,6 +71,10 @@ The Advanced Ordernumbers for WooCommerce plugin supports some invoicing plugins
 
 
 == Changelog ==
+
+= 1.1.1 =
+* Renamed the plugin files
+* Added icon for the plugin directory
 
 = 1.1 =
 * Some smaller bugfixes
