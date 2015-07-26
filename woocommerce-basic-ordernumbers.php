@@ -2,8 +2,8 @@
 /**
  * Plugin Name: WooCommerce Basic Ordernumbers
  * Plugin URI: http://open-tools.net/woocommerce/advanced-ordernumbers-for-woocommerce.html
- * Description: Lets the user freely configure the order numbers in WooCommerce.
- * Version: 1.0
+ * Description: Configure WooCommerce ordernumbers to have a running counter and arbitrary, fixed text (prefix / postfix).
+ * Version: 1.1
  * Author: Open Tools
  * Author URI: http://open-tools.net
  * Text Domain: woocommerce-advanced-ordernumbers

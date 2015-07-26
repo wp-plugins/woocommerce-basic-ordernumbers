@@ -110,22 +110,22 @@ class OpenToolsOrdernumbersBasic {
 		return $settings;
 	}
 	protected function initializeSettingsOrderNumbers() {
-		$settings = array(
-			array(
+		$settings = array();
+		$settings[] = array(
 				'name' 		=> $this->helper->__( 'Configure Order Numbers'),
 				'desc'		=> $this->helper->__( 'Configure the format and the counters of the order numbers in WooCommerce. For help, check out the plugin\'s <a href="http://open-tools.net/documentation/advanced-order-numbers-for-woocommerce.html">documentation at OpenTools</a>.'),
 				'type' 		=> 'title',
 				'id' 		=> 'ordernumber_options'
-			),
+			);
 
-			array(
+		$settings[] = array(
 				'name' 		=> $this->helper->__( 'Customize Order Numbers'),
 				'desc' 		=> $this->helper->__( 'Check to use custom order numbers rather than the default wordpress post ID.'),
 				'id' 		=> 'customize_ordernumber',
 				'type' 		=> 'checkbox',
 				'default'	=> 'no'
-			),
-			array(
+			);
+		$settings[] = array(
 				'title'		=> $this->helper->__( 'Order number format'),
 				'desc' 		=> $this->getNumberFormatSettingsLabel(),
 				'desc_tip'	=> true,
@@ -133,24 +133,18 @@ class OpenToolsOrdernumbersBasic {
 				'default'	=> '#',
 				'type' 		=> 'text',
 				'css'		=> 'width: 100%',
-			),
-			array(
-				'title'		=> $this->helper->__( 'Use global counter'),
-				'desc' 		=> $this->helper->__( 'A global counter never resets. Non-global counters run within each number format and reset whenever any variable changes.'),
-				'id' 		=> 'ordernumber_global',
-				'type' 		=> 'checkbox',
-				'default'	=> 'no',
-			),
-			array(
+			);
+		$settings = $this->addGlobalCounterSettings($settings);
+		$settings[] = array(
 				'name' 		=> $this->helper->__( 'All order number counters'),
 				'desc'		=> $this->helper->__( 'View and modify the current counter values. The counter value is the value used for the previous number. All changes are immediately applied!'),
 				'desc_tip'	=> true,
 				'id' 		=> 'ordernumber_counters',
 				'type' 		=> 'ordernumber_counters',
 				'nrtype' 	=> 'ordernumber',
-			),
-			array( 'type' => 'sectionend', 'id' => 'ordernumber_options' )
-		);
+			);
+		$settings[] = array('type' => 'sectionend', 'id' => 'ordernumber_options' );
+
 		add_option ('customize_ordernumber', 'no');
 		add_option ('ordernumber_format',    "#");
 		add_option ('ordernumber_global',    'no');
@@ -160,7 +154,10 @@ class OpenToolsOrdernumbersBasic {
 	 * Return the tooltip for the number format settings textinput (the two plugin versions have different features!)
 	 */
 	protected function getNumberFormatSettingsLabel() {
-		return $this->helper->__( 'The format for the order numbers: You can choose any text string, where the counter is indicated by # and variables by [...]. In the free version of the plugin, only the [year] and [year2] variables are available. For example, a format "WC-[year2]-#" will create order numbers "WC-15-01", "WC-15-02", "WC-15-03", ...');
+		return $this->helper->__( 'The format for the order numbers: You can choose any text string, where the counter is indicated by #. For example, a format "WC-#" will create order numbers "WC-376", "WC-377", "WC-378", ...<br>In the <b>advanced version</b> of the plugin, variables can be indicated [...], e.g. [year].');
+	}
+	protected function addGlobalCounterSettings($settings) {
+		return $settings;
 	}
 	
 	protected function initializeSettingsOther() {
@@ -375,9 +372,9 @@ class OpenToolsOrdernumbersBasic {
 	
 	/* Restrict date variables to years */
 	public function setupDateTimeReplacements (&$reps, $details, $nrtype) {
-		$utime = microtime(true);
-		$reps["[year]"] = date ("Y", $utime);
-		$reps["[year2]"] = date ("y", $utime);
+// 		$utime = microtime(true);
+// 		$reps["[year]"] = date ("Y", $utime);
+// 		$reps["[year2]"] = date ("y", $utime);
 	}
 
 	function generateNumber($orderid, $order, $type='ordernumber') {
